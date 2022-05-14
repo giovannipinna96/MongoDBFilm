@@ -1,0 +1,112 @@
+use tmdb_movies;
+
+// collection name
+db.getCollectionNames();
+
+// find all columns names
+Object.keys(db.tmdb_movies.findOne());
+
+//insert element
+db.tmdb_movies.insertOne({nome:"Test film"});
+
+//find total number of document
+db.tmdb_movies.countDocuments();
+
+// find element
+db.tmdb_movies.find({nome:"Test film"});
+
+// delete element
+db.tmdb_movies.deleteOne({nome:"Test film"});
+
+// number of film per original language
+db.tmdb_movies.aggregate([
+                        {$group:{_id:"$original_language", tot:{$sum:1}}}
+                        ]);
+
+db.tmdb_movies.aggregate([
+                        {$group:{_id:"$original_language", tot:{$sum:1}}},
+                        {$sort:{tot:-1}}
+                         ]);
+
+//number of film in italian
+db.tmdb_movies.find({original_language:"it"}).count();
+
+//find films with most popularity
+db.tmdb_movies.aggregate([
+                        {$group:{_id:"$original_title", max_pop: {$max:"$popularity"}}},
+                         {$sort:{max_pop:-1}}
+                         ])
+db.tmdb_movies.find({}, {original_title: 1, popularity: 1, _id: 0})
+               .sort({popularity:-1})
+               .limit(5);
+
+db.tmdb_movies.find({original_title:"Ad Astra"}, {original_title: 1, popularity: 1, _id: 0});
+
+//find films with less popularity
+db.tmdb_movies.aggregate([
+                        {$group:{_id:"$original_title", min_pop: {$max:"$popularity"}}},
+                        {$sort:{min_pop:1}}
+                        ]);
+db.tmdb_movies.find({}, {original_title: 1, popularity: 1, _id: 0})
+              .sort({popularity:1}).limit(15);
+
+//all film with popularity under 50
+db.tmdb_movies.find({ popularity: { $lt: 50}});
+
+//all film with popularity between 100 and 200
+db.tmdb_movies.find({
+                    $or:[
+                    { popularity: { $lt: 50}},
+                    { popularity: { $gt: 200}}
+                    ]
+                    });
+
+//film with best vote
+db.tmdb_movies.find({}, {original_title: 1, popularity: 1, vote_average:1, _id: 0})
+              .sort({vote_average:-1});
+
+//film with worst vote
+db.tmdb_movies.find({}, {original_title: 1, popularity: 1, vote_average:1, _id: 0})
+              .sort({vote_average:1})
+              .limit(15);
+
+//number of film with that vote
+db.tmdb_movies.aggregate([
+                            {$group:{_id:"$vote_average", tot:{$sum:1}}},
+                            {$sort: {tot:-1}}
+                    ]);
+
+//find vote only if the film has more than 100 review
+db.tmdb_movies.find({}, {vote_count:1, _id:0}).sort({vote_count:-1});
+db.tmdb_movies.find({}, {vote_count:1, _id:0}).sort({vote_count:1});
+db.tmdb_movies.find({ vote_count: { $gt: 10000}}, {original_title: 1, popularity: 1, vote_average:1, _id: 0})
+              .sort({vote_average:-1});
+
+//find the films with low vote_average but big popularity
+db.tmdb_movies.find({$and:[
+                         {vote_average:{$lt: 4}},
+                         {vote_count:{$gt:50}},
+                         {popularity:{$gt:10}},
+                         ]},
+                    {original_title:1, original_language:1,
+                     popularity:1, vote_average:1,
+                     vote_count:1, release_date:1, _id:0
+                     }
+                   );
+
+//film for adult
+db.tmdb_movies.aggregate([{$group:{_id:"$adult", tot:{$sum:1}}}]);
+
+db.tmdb_movies.find({adult:true},
+                    {original_title:1, original_language:1,
+                     popularity:1, vote_average:1,
+                     vote_count:1, release_date:1, _id:0}
+                     );
+
+
+//count gener id
+db.tmdb_movies.aggregate([{$group:
+                                {_id:"$genre_ids", tot:{$sum:1}}},
+                                {$sort:{tot:-1}}
+                         ]);
+
