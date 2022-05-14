@@ -1,0 +1,201 @@
+//find film by release date
+db.tmdb_movies.find({release_date:{$regex:/2019-[0-9]*-[0-9]*/}},
+                    {original_language:1, original_title:1, release_date:1, _id:0}
+                    );
+
+//change release_date
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2020-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2020" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2019-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2019" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2018-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2018" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2017-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2017" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2016-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2016" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2015-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2015" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2014-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2014" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2013-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2013" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2012-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2012" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2011-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2011" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2010-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2010" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2009-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2009" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2008-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2008" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2007-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2007" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2006-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2006" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2005-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2005" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2004-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2004" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2003-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2003" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2002-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2002" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2001-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2001" }
+    }}
+  }]
+);
+
+db.tmdb_movies.updateMany(
+  { release_date: { $regex: /2000-[0-9]+-[0-9]+/ } },
+  [{
+    $set: { release_date: {
+      $replaceAll: { input: "$release_date", find: "$release_date", replacement: "2000" }
+    }}
+  }]
+);
+
+//cout number of film per year
+db.tmdb_movies.aggregate([
+                        {$group:{_id:"$release_date", tot:{$sum:1}}},
+                        {$sort:{tot:-1}}
+                        ]);
+
